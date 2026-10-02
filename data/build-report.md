@@ -1,0 +1,124 @@
+# Journeyman player build report
+
+Generated: 2026-10-02T09:25:38.443Z
+
+- Requested seed list: 108 Wikipedia pages
+- Included: 108
+- Excluded: 0 (three ambiguous titles were retried under the correct page name and added)
+- Included with warnings: 4
+
+Names below are for manual data checking. The game file stores names and photo URLs as base64.
+
+## Included with warnings
+
+- Emmanuel Adebayor: row 12 (Semassi) missing apps; row 12 (Semassi) missing goals
+- John Carew: row 2 (Rosenborg) has more goals than apps
+- Wilfried Bony: row 1 (Issia Wazy) missing apps; row 1 (Issia Wazy) missing goals
+- George Best: row 12 (Sea Bee) missing apps; row 12 (Sea Bee) missing goals; row 13 (Hong Kong Rangers) missing apps; row 13 (Hong Kong Rangers) missing goals
+
+## Clean
+
+- Nicolas Anelka: 13 senior rows, France, born 1979
+- Craig Bellamy: 11 senior rows, Wales, born 1979
+- Robbie Keane: 13 senior rows, Republic of Ireland, born 1980
+- Mario Balotelli: 15 senior rows, Italy, born 1990
+- Ricardo Quaresma: 12 senior rows, Portugal, born 1983
+- José Antonio Reyes: 11 senior rows, Spain, born 1983
+- Carlos Tevez: 9 senior rows, Argentina, born 1984
+- Radamel Falcao: 10 senior rows, Colombia, born 1986
+- Diego Forlán: 10 senior rows, Uruguay, born 1979
+- Samuel Eto'o: 14 senior rows, Cameroon, born 1981
+- Zlatan Ibrahimović: 11 senior rows, Sweden, born 1981
+- Alexis Sánchez: 14 senior rows, Chile, born 1988
+- Pierre-Emerick Aubameyang: 13 senior rows, Gabon, born 1989
+- Alexandre Lacazette: 5 senior rows, France, born 1991
+- Olivier Giroud: 10 senior rows, France, born 1986
+- Edinson Cavani: 7 senior rows, Uruguay, born 1987
+- Gonzalo Higuaín: 7 senior rows, Argentina, born 1987
+- Ángel Di María: 8 senior rows, Argentina, born 1988
+- James Rodríguez: 14 senior rows, Colombia, born 1991
+- Juan Mata: 8 senior rows, Spain, born 1988
+- Mesut Özil: 6 senior rows, Germany, born 1988
+- Cesc Fàbregas: 6 senior rows, Spain, born 1987
+- Santi Cazorla: 9 senior rows, Spain, born 1984
+- Philippe Coutinho: 12 senior rows, Brazil, born 1992
+- Robin van Persie: 5 senior rows, Netherlands, born 1983
+- Dirk Kuyt: 5 senior rows, Netherlands, born 1980
+- Wesley Sneijder: 6 senior rows, Netherlands, born 1984
+- Rafael van der Vaart: 8 senior rows, Netherlands, born 1983
+- Arjen Robben: 6 senior rows, Netherlands, born 1984
+- Clarence Seedorf: 6 senior rows, Netherlands, born 1976
+- Rivaldo: 15 senior rows, Brazil, born 1972
+- Deco: 9 senior rows, Portugal, born 1977
+- Michael Ballack: 6 senior rows, Germany, born 1976
+- Miroslav Klose: 5 senior rows, Germany, born 1978
+- Lukas Podolski: 9 senior rows, Germany, born 1985
+- Henrik Larsson: 9 senior rows, Sweden, born 1971
+- Nwankwo Kanu: 6 senior rows, Nigeria, born 1976
+- Jay-Jay Okocha: 8 senior rows, Nigeria, born 1973
+- Didier Drogba: 9 senior rows, Ivory Coast, born 1978
+- Michael Essien: 8 senior rows, Ghana, born 1982
+- Florent Malouda: 9 senior rows, France, born 1980
+- Ashley Young: 7 senior rows, England, born 1985
+- James Milner: 8 senior rows, England, born 1986
+- Theo Walcott: 5 senior rows, England, born 1989
+- Aaron Ramsey: 9 senior rows, Wales, born 1990
+- Fernando Torres: 8 senior rows, Spain, born 1984
+- David Beckham: 7 senior rows, England, born 1975
+- Andriy Shevchenko: 6 senior rows, Ukraine, born 1976
+- Hernán Crespo: 10 senior rows, Argentina, born 1975
+- Christian Vieri: 15 senior rows, Italy, born 1973
+- Patrick Kluivert: 7 senior rows, Netherlands, born 1976
+- Ruud van Nistelrooy: 7 senior rows, Netherlands, born 1976
+- Salomon Kalou: 7 senior rows, Ivory Coast, born 1985
+- Dimitar Berbatov: 8 senior rows, Bulgaria, born 1981
+- Darren Bent: 10 senior rows, England, born 1984
+- Jermain Defoe: 13 senior rows, England, born 1982
+- Peter Crouch: 13 senior rows, England, born 1981
+- Emile Heskey: 7 senior rows, England, born 1978
+- Hatem Ben Arfa: 11 senior rows, France, born 1987
+- Frédéric Kanouté: 6 senior rows, Mali, born 1977
+- Yaya Touré: 8 senior rows, Ivory Coast, born 1983
+- Gervinho: 9 senior rows, Ivory Coast, born 1987
+- Nani: 13 senior rows, Portugal, born 1986
+- Robinho: 11 senior rows, Brazil, born 1984
+- Ronaldinho: 9 senior rows, Brazil, born 1980
+- Kaká: 6 senior rows, Brazil, born 1982
+- Alexandre Pato: 10 senior rows, Brazil, born 1989
+- Javier Saviola: 10 senior rows, Argentina, born 1981
+- Pablo Aimar: 7 senior rows, Argentina, born 1979
+- Diego Milito: 6 senior rows, Argentina, born 1979
+- Juan Sebastián Verón: 13 senior rows, Argentina, born 1975
+- Ezequiel Lavezzi: 5 senior rows, Argentina, born 1985
+- Carlos Bacca: 12 senior rows, Colombia, born 1986
+- Jackson Martínez: 8 senior rows, Colombia, born 1986
+- Felipe Caicedo: 13 senior rows, Ecuador, born 1988
+- Loïc Rémy: 14 senior rows, France, born 1987
+- Bafétimbi Gomis: 9 senior rows, France, born 1985
+- Stevan Jovetić: 11 senior rows, Montenegro, born 1989
+- Bojan Krkić: 11 senior rows, Spain, born 1990
+- Giovani dos Santos: 10 senior rows, Mexico, born 1989
+- Eiður Guðjohnsen: 17 senior rows, Iceland, born 1978
+- Javier Mascherano: 7 senior rows, Argentina, born 1984
+- Sulley Muntari: 11 senior rows, Ghana, born 1984
+- Youri Djorkaeff: 9 senior rows, France, born 1968
+- Ludovic Giuly: 8 senior rows, France, born 1976
+- André Ayew: 11 senior rows, Ghana, born 1989
+- Jordan Ayew: 9 senior rows, Ghana, born 1991
+- Marouane Chamakh: 5 senior rows, Morocco, born 1984
+- Klaas-Jan Huntelaar: 10 senior rows, Netherlands, born 1983
+- Jürgen Klinsmann: 9 senior rows, Germany, born 1964
+- Luís Figo: 4 senior rows, Portugal, born 1972
+- Roberto Baggio: 7 senior rows, Italy, born 1967
+- Enzo Scifo: 8 senior rows, Belgium, born 1966
+- Jean-Pierre Papin: 10 senior rows, France, born 1963
+- Gianluca Vialli: 4 senior rows, Italy, born 1964
+- Seydou Keita: 9 senior rows, Mali, born 1980
+- Ivan Rakitić: 8 senior rows, Croatia, born 1988
+- Ricardo Carvalho: 8 senior rows, Portugal, born 1978
+- Mateja Kežman: 14 senior rows, Serbia and Montenegro, born 1979
+- Maxi Rodríguez: 7 senior rows, Argentina, born 1981
+- Rodrigo Palacio: 7 senior rows, Argentina, born 1982
+- Luis Suárez: 9 senior rows, Uruguay, born 1987
+- Rui Costa: 5 senior rows, Portugal, born 1972
+- Simão: 7 senior rows, Portugal, born 1979

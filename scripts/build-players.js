@@ -126,14 +126,14 @@ export const SEED_PLAYERS = [
   "George Best",
   "Jürgen Klinsmann",
   "Luís Figo",
-  "Rui Costa (footballer)",
+  "Rui Costa",
   "Roberto Baggio",
   "Enzo Scifo",
   "Jean-Pierre Papin",
   "Gianluca Vialli",
   "Seydou Keita",
   "Ivan Rakitić",
-  "Simão (footballer)",
+  "Simão Sabrosa",
   "Ricardo Carvalho",
   "Mateja Kežman",
   "Maxi Rodríguez",
@@ -178,6 +178,7 @@ const FLAG_ISO = {
   gabon: "GA",
   georgia: "GE",
   germany: "DE",
+  "west germany": "DE",
   ghana: "GH",
   greece: "GR",
   hungary: "HU",
@@ -321,19 +322,15 @@ async function fetchPhoto(title) {
   return toThumb(page?.thumbnail?.source || "");
 }
 
-/** Prefer a 640px Wikimedia thumbnail so phones are not sent full-size photos. */
+/** Keep the API thumbnail. Strip tracking params. Do not invent a larger size. */
 function toThumb(url) {
   if (!url) return "";
   try {
     const parsed = new URL(url);
     parsed.search = "";
-    if (parsed.pathname.includes("/thumb/")) return parsed.toString();
-    const match = parsed.pathname.match(/\/wikipedia\/((?:commons|[a-z]{2}))\/([0-9a-f]\/[0-9a-f]{2})\/([^/]+)$/i);
-    if (!match) return parsed.toString();
-    const [, project, hash, file] = match;
-    return `https://upload.wikimedia.org/wikipedia/${project}/thumb/${hash}/${file}/640px-${file}`;
+    return parsed.toString();
   } catch {
-    return url;
+    return url.split("?")[0];
   }
 }
 
@@ -523,12 +520,35 @@ function parseNumber(raw) {
   return match ? Number(match[0]) : null;
 }
 
+function yearInRange(year) {
+  return year >= 1940 && year <= 2012 ? year : null;
+}
+
 function parseBirthYear(raw) {
   const text = stripRefs(raw || "");
   const match = text.match(/\b(19\d{2}|20\d{2})\b/);
   if (!match) return null;
-  const year = Number(match[1]);
-  return year >= 1940 && year <= 2012 ? year : null;
+  return yearInRange(Number(match[1]));
+}
+
+/** Officeholder pages keep the birth date outside the embedded football infobox. */
+function birthYearFromArticle(wikitext, fromInfobox) {
+  if (fromInfobox) return fromInfobox;
+  const category = wikitext.match(/\[\[Category:\s*(\d{4})\s+births\s*\]\]/i);
+  if (category) {
+    const year = yearInRange(Number(category[1]));
+    if (year) return year;
+  }
+  const template = wikitext.match(/\{\{\s*birth date(?: and age)?\s*\|(?:[a-z]+\s*=\s*[^|]+\|)*(\d{4})\s*\|/i);
+  return template ? yearInRange(Number(template[1])) : null;
+}
+
+function tidyPersonName(name) {
+  const parts = String(name || "")
+    .split(/\s*\/\s*/)
+    .map((part) => part.trim())
+    .filter((part) => part && /[A-Za-zÀ-ÿ]/.test(part));
+  return parts[0] || String(name || "").replace(/[/]+/g, " ").replace(/\s+/g, " ").trim();
 }
 
 function tidyYears(raw) {
@@ -571,7 +591,10 @@ function countryFromTeam(team) {
     .replace(/\b(team|under[-\s]?\d+|u[-\s]?\d+)\b/gi, " ")
     .replace(/\s+/g, " ")
     .trim();
-  return name;
+  const parts = name.split(/\s*\/\s*/).map((part) => part.trim()).filter(Boolean);
+  const mapped = parts.filter((part) => flagEmoji(part));
+  if (mapped.length) return mapped[mapped.length - 1];
+  return parts[parts.length - 1] || name;
 }
 
 function isReserveSide(team) {
@@ -625,8 +648,10 @@ function internationalsFromParams(params) {
       goals: parseNumber(params[`nationalgoals${i}`]),
     });
   }
-  rows.sort((a, b) => (b.caps || 0) - (a.caps || 0));
-  return rows[0] || null;
+  const mapped = rows.filter((row) => flagEmoji(row.team));
+  const pool = mapped.length ? mapped : rows;
+  pool.sort((a, b) => (b.caps || 0) - (a.caps || 0));
+  return pool[0] || null;
 }
 
 function clubStatus(currentRaw, career) {
@@ -649,16 +674,20 @@ function buildPlayer(pageTitle, wikitext, photo) {
     return { error: "No football infobox found" };
   }
   const params = parseTemplate(template);
-  const name = cleanInline(params.name || "") || pageTitle.replace(/\s+\([^)]*\)$/, "");
+  const rawName = cleanInline(params.name || "") || pageTitle.replace(/\s+\([^)]*\)$/, "");
+  const nameParts = rawName.split(/\s*\/\s*/).map((part) => part.trim()).filter(Boolean);
+  const name = tidyPersonName(rawName);
   const fullName = cleanInline(params.fullname || params.full_name || "");
-  const aliases = [];
-  if (fullName && fold(fullName) !== fold(name)) aliases.push(fullName);
+  const aliases = nameParts.filter((part) => fold(part) !== fold(name));
+  if (fullName && fold(fullName) !== fold(name) && !aliases.some((alias) => fold(alias) === fold(fullName))) {
+    aliases.push(fullName);
+  }
   const folded = fold(name);
   if (folded !== name.toLowerCase()) aliases.push(folded.replace(/\b\w/g, (char) => char.toUpperCase()));
 
   const career = careerFromParams(params);
   const intl = internationalsFromParams(params);
-  const birthYear = parseBirthYear(params.birth_date || params.birthdate || "");
+  const birthYear = birthYearFromArticle(wikitext, parseBirthYear(params.birth_date || params.birthdate || ""));
   const position = tidyPosition(params.position || "");
   const nationality = intl?.team || "";
   const { club, clubLabel } = clubStatus(params.currentclub || "", career);
@@ -824,11 +853,12 @@ async function main() {
   }
   results.forEach((result) => {
     if (!result.player || result.fatal) return;
-    if (seen.has(result.player.id)) {
-      result.fatal = true;
-      result.issues = [...(result.issues || []), "duplicate id"];
+    const existingIndex = players.findIndex((player) => player.id === result.player.id);
+    if (existingIndex >= 0) {
+      players[existingIndex] = result.player;
       return;
     }
+    if (seen.has(result.player.id)) return;
     seen.add(result.player.id);
     players.push(result.player);
   });
