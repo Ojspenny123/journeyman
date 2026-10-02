@@ -572,8 +572,8 @@ main {
 
 .suggestions {
   position: absolute;
-  left: 0;
-  right: 0;
+  left: -12px;
+  right: -12px;
   top: calc(100% + 6px);
   margin: 0;
   padding: 6px;

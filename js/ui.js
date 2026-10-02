@@ -370,6 +370,10 @@ function bindGuess(handlers, focusGuess) {
   });
 
   input.addEventListener("focus", () => {
+    if (bindGuess.restoring) {
+      bindGuess.restoring = false;
+      return;
+    }
     window.setTimeout(() => {
       input.scrollIntoView({ block: "center", behavior: reducedMotion() ? "auto" : "smooth" });
     }, 280);
@@ -386,8 +390,8 @@ function bindGuess(handlers, focusGuess) {
   }
 
   if (focusGuess) {
+    bindGuess.restoring = true;
     input.focus({ preventScroll: true });
-    input.scrollIntoView({ block: "center" });
   }
 }
 
