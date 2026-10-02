@@ -1,0 +1,41 @@
+# Static site. Publish the project root; there is no build step.
+[build]
+  publish = "."
+
+# The shell and the daily squad must update as soon as a deploy is live.
+[[headers]]
+  for = "/"
+  [headers.values]
+    Cache-Control = "public, max-age=0, must-revalidate"
+
+[[headers]]
+  for = "/index.html"
+  [headers.values]
+    Cache-Control = "public, max-age=0, must-revalidate"
+
+[[headers]]
+  for = "/data/players.json"
+  [headers.values]
+    Cache-Control = "public, max-age=0, must-revalidate"
+
+# CSS, JS, and the icon are static and not content-hashed, so the cache is
+# long but not immutable. A rollback is visible within a week.
+[[headers]]
+  for = "/css/*"
+  [headers.values]
+    Cache-Control = "public, max-age=604800"
+
+[[headers]]
+  for = "/js/*"
+  [headers.values]
+    Cache-Control = "public, max-age=604800"
+
+[[headers]]
+  for = "/favicon.svg"
+  [headers.values]
+    Cache-Control = "public, max-age=604800"
+
+[[headers]]
+  for = "/robots.txt"
+  [headers.values]
+    Cache-Control = "public, max-age=86400"
