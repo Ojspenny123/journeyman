@@ -37,8 +37,8 @@ function check(name, fn) {
 }
 
 check("version label", () => {
-  assert.equal(VERSION, "1.0.0");
-  assert.equal(footerVersion(), "v1.0");
+  assert.equal(VERSION, "2.0.0");
+  assert.equal(footerVersion(), "v2.0");
 });
 
 check("accent folding", () => {

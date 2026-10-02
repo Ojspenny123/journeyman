@@ -521,7 +521,14 @@ main {
   flex: none;
 }
 
-/* Guess box */
+/* Guess box. Sits above the clues so a newly unlocked clue grows below it. */
+
+.guess-slot {
+  position: relative;
+  z-index: 5;
+  display: grid;
+  gap: 10px;
+}
 
 .guess-dock {
   position: relative;
@@ -529,6 +536,10 @@ main {
   border-radius: 18px;
   padding: 12px;
   box-shadow: var(--shadow), 0 4px 0 #d6e6fb;
+}
+
+.guess-field {
+  position: relative;
 }
 
 .guess-dock.shake {
@@ -561,16 +572,16 @@ main {
 
 .suggestions {
   position: absolute;
-  left: 12px;
-  right: 12px;
-  bottom: calc(100% - 4px);
+  left: -12px;
+  right: -12px;
+  top: calc(100% + 6px);
   margin: 0;
   padding: 6px;
   list-style: none;
   background: #fff;
   border-radius: 16px;
-  box-shadow: 0 16px 40px rgba(20, 33, 61, 0.14);
-  z-index: 15;
+  box-shadow: 0 16px 40px rgba(20, 33, 61, 0.18);
+  z-index: 40;
 }
 
 .suggestions[hidden] {

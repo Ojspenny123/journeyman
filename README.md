@@ -1,6 +1,6 @@
 # Journeyman
 
-**Version 1.0.0**
+**Version 2.0.0**
 
 Name the player from their career.
 
@@ -35,6 +35,26 @@ No server-side code runs in production. Progress, streaks, and stats stay in the
 
 The day rolls over at midnight Europe/London. Puzzle #1 is 22 August 2026.
 
+## Deployment
+
+Production is a static site on Netlify. `netlify.toml` publishes the project root and does not run a build. `index.html` and `data/players.json` are revalidated on every visit. CSS, JavaScript, and `favicon.svg` are cached for seven days. Those files are not content-hashed, so a style or script change can take up to a week to replace a cached copy. The page and the squad update immediately.
+
+Link the repo once (Netlify UI, or `netlify login` then `netlify init` in this folder). After that, redeploy with:
+
+```bash
+netlify deploy --prod
+```
+
+A push to the production branch on a linked site does the same thing.
+
+To roll back, open the site in Netlify, go to Deploys, choose an earlier production deploy, and select Publish deploy. From a linked folder you can also run:
+
+```bash
+netlify rollback
+```
+
+That restores the previous production deploy. Because the HTML and player file are not cached, the rolled-back puzzle is what the next visit loads. Cached CSS or JavaScript from the newer deploy can linger for up to seven days.
+
 ## Update the player list
 
 `scripts/build-players.js` reads senior-career infoboxes from the English Wikipedia API and writes `data/players.json`. Names and photo URLs are stored as base64 so the answer is not readable at a glance. A short QA note is written to `data/build-report.md`.
@@ -64,9 +84,9 @@ That checks the date seed, guess rules, streaks, and that `players.json` does no
 - A finished day cannot be replayed. Refreshing keeps an in-progress day.
 - Share text uses squares only. It never includes a player's name.
 
-## Planned for V2
+## Planned for V3
 
-These are not in version 1:
+These are not in version 2:
 
 - Dark mode
 - Practice mode and an archive of previous days
