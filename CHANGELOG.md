@@ -1,5 +1,10 @@
 # Changelog
 
+## V2.0.0 — 2026-10-02
+
+- Guessing area sits under the career table and above the clues, so a new clue no longer pushes the search box
+- Production deploy on Netlify, with `netlify.toml`, `robots.txt`, and a favicon
+
 ## V1.0.0 — 2026-10-02
 
 First playable release of Journeyman.
