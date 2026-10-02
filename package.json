@@ -1,0 +1,12 @@
+{
+  "name": "journeyman",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Journeyman — name the player from their career. A static daily football puzzle.",
+  "scripts": {
+    "build:players": "node scripts/build-players.js",
+    "check": "node scripts/check-game.js",
+    "start": "python3 -m http.server 8080"
+  }
+}

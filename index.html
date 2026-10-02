@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="color-scheme" content="light" />
+    <meta name="theme-color" content="#F4F9FF" />
+    <meta name="description" content="Journeyman — name the player from their career. A daily football guessing game." />
+    <title>Journeyman</title>
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 48 48'%3E%3Crect width='48' height='48' rx='12' fill='%23F4F9FF'/%3E%3Cpath d='M18 16V13a6 6 0 0 1 12 0v3' fill='none' stroke='%2314213D' stroke-width='2.5' stroke-linecap='round'/%3E%3Crect x='8' y='16' width='32' height='22' rx='6' fill='%2316C06B'/%3E%3Ccircle cx='31' cy='27' r='6' fill='%23fff' stroke='%2314213D' stroke-width='1.4'/%3E%3C/svg%3E" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700;12..96,800&family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,600;0,9..40,700;1,9..40,400&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="css/styles.css" />
+  </head>
+  <body>
+    <a class="skip" href="#app">Skip to the puzzle</a>
+    <div id="page">
+      <div class="topbar">
+        <div class="accent-strip" aria-hidden="true"></div>
+        <header class="site-header">
+          <div class="wrap header-inner">
+            <div class="brand">
+              <svg class="logo-icon" viewBox="0 0 48 48" aria-hidden="true">
+                <path d="M18 16.5V12.5a6 6 0 0 1 12 0v4" fill="none" stroke="#14213D" stroke-width="2.6" stroke-linecap="round" />
+                <rect x="7" y="16" width="34" height="23" rx="7" fill="#16C06B" />
+                <rect x="7" y="16" width="34" height="23" rx="7" fill="none" stroke="#0A7A45" stroke-width="2" />
+                <circle cx="32" cy="27.5" r="6.2" fill="#F4F9FF" stroke="#14213D" stroke-width="1.5" />
+                <path d="M32 23.2l1.15 2.35h2.55l-2.05 1.55.8 2.5L32 28.05l-2.45 1.55.8-2.5-2.05-1.55h2.55z" fill="#14213D" />
+              </svg>
+              <div class="brand-copy">
+                <h1 class="wordmark">Journeyman</h1>
+                <p class="tagline" id="tagline" hidden>Name the player from their career</p>
+              </div>
+            </div>
+            <div class="header-actions">
+              <p class="streak-pill" id="streak-pill" aria-label="Current streak: 0 days">
+                <svg class="flame" viewBox="0 0 24 24" aria-hidden="true">
+                  <path fill="#FFC933" stroke="#C2410C" stroke-width="1.2" d="M12 2s2.2 3.1 2.2 5.2c0 1.3-.7 2.2-1.5 2.8.2-1.6-.4-2.8-.4-2.8S8 10.2 8 13.4C8 16.6 10 19 12.4 19S17 16.5 17 13.6c0-2.4-1.2-4.1-1.2-4.1S14.8 11 14 11c.7-1.6 1-3.2.4-4.8C13.6 4.2 12 2 12 2z" />
+                  <path fill="#FF8A00" d="M12.2 19c-1.5 0-2.8-1.2-3-2.8.9.5 1.6.2 2-.4.6.8 1.6 1 2.4.6-.2 1.5-.8 2.6-1.4 2.6z" />
+                </svg>
+                <span id="streak-count">0</span>
+              </p>
+              <button type="button" class="icon-btn stats" id="stats-btn" aria-label="Stats">
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                  <path fill="currentColor" d="M4 19.5A1.5 1.5 0 0 1 5.5 18H7v-5.5A1.5 1.5 0 0 1 8.5 11h1A1.5 1.5 0 0 1 11 12.5V18h2V8.5A1.5 1.5 0 0 1 14.5 7h1A1.5 1.5 0 0 1 17 8.5V18h1.5a1.5 1.5 0 0 1 0 3h-13A1.5 1.5 0 0 1 4 19.5z" />
+                </svg>
+              </button>
+              <button type="button" class="icon-btn help" id="help-btn" aria-label="How to play">
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                  <circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="2" />
+                  <path fill="currentColor" d="M11 16.5h2V18h-2zm1-11a3.4 3.4 0 0 0-3.4 3.1h2A1.4 1.4 0 1 1 12.1 10c-.9.4-1.6 1.2-1.6 2.4V14h2v-1.2c0-.4.2-.7.7-.9A3.3 3.3 0 0 0 12 5.5z" />
+                </svg>
+              </button>
+            </div>
+          </div>
+        </header>
+      </div>
+      <main id="app" tabindex="-1"></main>
+      <footer class="site-footer">
+        <div class="wrap footer-inner">
+          <p>Created by OJ Spenny Gaming <span class="version" id="version-label">v1.0</span></p>
+          <p>Player data from Wikipedia, licensed CC BY-SA</p>
+        </div>
+      </footer>
+    </div>
+    <div id="modal-root" hidden></div>
+    <div id="toast" role="status" aria-live="polite"></div>
+    <div id="live" class="sr-only" aria-live="polite"></div>
+    <noscript>
+      <p class="noscript">Journeyman needs JavaScript to deal today's players.</p>
+    </noscript>
+    <script type="module" src="js/main.js"></script>
+  </body>
+</html>
