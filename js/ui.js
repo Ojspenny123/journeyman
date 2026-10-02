@@ -242,20 +242,25 @@ export function renderPlay(model, handlers) {
       model.wrongs.map((name) => h("span", { class: "chip" }, chipIcon(), name)))
     : null;
 
+  const guessSlot = model.reveal
+    ? h("div", { class: "guess-slot" },
+      reveal,
+      h("button", { class: "btn", type: "button" }, model.reveal.nextLabel))
+    : h("div", { class: "guess-slot" },
+      guessBox(),
+      chips);
+
   const section = h("section", { class: "stack" },
     h("div", { class: "round-top" },
       h("div", {},
         h("p", { class: "progress-copy" }, `Player ${model.playerNumber} of ${model.playerCount}`),
         segments),
       h("p", { class: "guess-pill" }, dotRow(model.dots), model.counter)),
-    reveal,
-    reveal ? h("button", { class: "btn", type: "button" }, model.reveal.nextLabel) : null,
     h("article", { class: `card career-card${model.shake ? " shake" : ""}` },
       h("h2", { id: "career-title" }, "Senior career"),
       careerTable(model.career, model.totals)),
-    clueList(model.clues),
-    chips,
-    model.reveal ? null : guessBox());
+    guessSlot,
+    clueList(model.clues));
 
   const nextButton = section.querySelector(".btn");
   if (nextButton) nextButton.addEventListener("click", handlers.onNext);
@@ -275,21 +280,22 @@ function chipIcon() {
 function guessBox() {
   return h("form", { class: "guess-dock", autocomplete: "off" },
     h("label", { class: "guess-label", for: "guess-input" }, "Who is it?"),
-    h("input", {
-      id: "guess-input",
-      class: "guess-input",
-      type: "text",
-      role: "combobox",
-      placeholder: "Search for a player",
-      autocomplete: "off",
-      autocorrect: "off",
-      spellcheck: "false",
-      enterkeyhint: "search",
-      "aria-autocomplete": "list",
-      "aria-controls": "suggestions",
-      "aria-expanded": "false",
-    }),
-    h("ul", { id: "suggestions", class: "suggestions", role: "listbox", hidden: "hidden" }),
+    h("div", { class: "guess-field" },
+      h("input", {
+        id: "guess-input",
+        class: "guess-input",
+        type: "text",
+        role: "combobox",
+        placeholder: "Search for a player",
+        autocomplete: "off",
+        autocorrect: "off",
+        spellcheck: "false",
+        enterkeyhint: "search",
+        "aria-autocomplete": "list",
+        "aria-controls": "suggestions",
+        "aria-expanded": "false",
+      }),
+      h("ul", { id: "suggestions", class: "suggestions", role: "listbox", hidden: "hidden" })),
     h("p", { id: "guess-feedback", class: "feedback", "aria-live": "polite" }));
 }
 
